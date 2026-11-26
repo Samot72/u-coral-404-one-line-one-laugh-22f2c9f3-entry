@@ -18,6 +18,12 @@ function validate(line: string): void {
   if (line.trim().length === 0) {
     throw new Error("entry must not be empty or whitespace-only");
   }
+  if (line !== line.trim()) {
+    throw new Error("entry must not have leading or trailing whitespace");
+  }
+  if (/\s{2,}/.test(line)) {
+    throw new Error("entry must not contain doubled whitespace");
+  }
   if (line.includes("\n") || line.includes("\r")) {
     throw new Error("entry must be a single line");
   }
